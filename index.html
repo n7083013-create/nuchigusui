@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NUCHIGUSUI | アクセスバーズ・自律神経ケアサロン｜沖縄市美里</title>
+  <meta name="description" content="沖縄市美里のアクセスバーズ・自律神経ケアサロン NUCHIGUSUI（ぬちぐすい）。心と体のバランスを整え、本来の自分へ。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;500&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ローダー -->
+<div id="loader">
+  <div class="loader-inner">
+    <div class="loader-logo-wrap">
+      <span class="loader-en" id="loaderText">NUCHIGUSUI</span>
+      <span class="loader-ja">ぬ ち ぐ す い</span>
+    </div>
+    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+  </div>
+  <div class="loader-panel left"></div>
+  <div class="loader-panel right"></div>
+</div>
+
+<!-- カスタムカーソル -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- ヘッダー -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="#top" class="logo">
+      <span class="logo-en">NUCHIGUSUI</span>
+      <span class="logo-ja">ぬちぐすい</span>
+    </a>
+    <nav class="nav" id="nav">
+      <ul>
+        <li><a href="#philosophy">コンセプト</a></li>
+        <li><a href="#menu">メニュー</a></li>
+        <li><a href="#flow">ご利用の流れ</a></li>
+        <li><a href="#voice">お客様の声</a></li>
+        <li><a href="#access">アクセス</a></li>
+        <li><a href="#booking" class="nav-cta magnetic" data-magnetic>予約する</a></li>
+      </ul>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ヒーロー -->
+<section class="hero" id="top">
+  <div class="hero-canvas" id="heroCanvas"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-particles" id="heroParticles"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow reveal-text">沖縄市美里 · アクセスバーズ · 自律神経ケアサロン</p>
+    <h1 class="hero-title">
+      <span class="hero-title-line"><em class="split-word">NUCHIGUSUI</em></span>
+    </h1>
+    <p class="hero-kana reveal-text">ぬ　ち　ぐ　す　い</p>
+    <p class="hero-sub reveal-text">からだが緩む。こころが喜ぶ。<br class="sp-br">あなた本来の輝きへ。</p>
+    <div class="hero-actions reveal-text">
+      <a href="#booking" class="btn-hero magnetic" data-magnetic>
+        <span>空き状況・ご予約</span>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#philosophy" class="btn-hero-ghost">サロンについて</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-indicator">
+    <div class="scroll-line-wrap"><div class="scroll-line-inner"></div></div>
+    <span>scroll</span>
+  </div>
+
+  <div class="hero-corner-text">Okinawa · Misato · 2025</div>
+</section>
+
+<!-- マーキー -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>ACCESS BARS</span><span class="dot">◆</span>
+    <span>アクセスバーズ</span><span class="dot">◆</span>
+    <span>自律神経ケア</span><span class="dot">◆</span>
+    <span>AUTONOMIC CARE</span><span class="dot">◆</span>
+    <span>NUCHIGUSUI</span><span class="dot">◆</span>
+    <span>ぬちぐすい</span><span class="dot">◆</span>
+    <span>命の薬</span><span class="dot">◆</span>
+    <span>沖縄 · OKINAWA</span><span class="dot">◆</span>
+    <!-- 繰り返し -->
+    <span>ACCESS BARS</span><span class="dot">◆</span>
+    <span>アクセスバーズ</span><span class="dot">◆</span>
+    <span>自律神経ケア</span><span class="dot">◆</span>
+    <span>AUTONOMIC CARE</span><span class="dot">◆</span>
+    <span>NUCHIGUSUI</span><span class="dot">◆</span>
+    <span>ぬちぐすい</span><span class="dot">◆</span>
+    <span>命の薬</span><span class="dot">◆</span>
+    <span>沖縄 · OKINAWA</span><span class="dot">◆</span>
+  </div>
+</div>
+
+<!-- フィロソフィー -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-grid">
+    <div class="philosophy-visual">
+      <div class="philosophy-visual-inner">
+        <div class="visual-orb orb-1"></div>
+        <div class="visual-orb orb-2"></div>
+        <div class="visual-orb orb-3"></div>
+        <div class="philosophy-quote-visual">
+          <span>命</span>
+          <span>の</span>
+          <span>薬</span>
+        </div>
+      </div>
+    </div>
+    <div class="philosophy-body">
+      <div class="philosophy-body-inner">
+        <p class="section-en fade-up">PHILOSOPHY</p>
+        <h2 class="philosophy-heading fade-up">
+          <span>ぬちぐすい——</span>
+          <em>命の薬という意味。</em>
+        </h2>
+        <div class="philosophy-text fade-up">
+          <p>「なんとなく疲れている」「よく眠れない」「頭がいつも忙しい」——でも、病院に行くほどでもない。そんなあいまいなしんどさを抱えている方に、私たちのサロンはあります。</p>
+          <p>NUCHIGUSUIは、アクセスバーズと自律神経ケアを通じて、あなたが本来持っている回復力・喜び・可能性を取り戻すための場所です。</p>
+          <p class="philosophy-accent">施術後に「ああ、生きてるってこういうことか」と感じる——その瞬間が、ぬちぐすいです。</p>
+        </div>
+        <div class="philosophy-pills fade-up">
+          <span class="pill">アクセスバーズ</span>
+          <span class="pill">自律神経ケア</span>
+          <span class="pill">プライベート空間</span>
+          <span class="pill">沖縄市美里</span>
+        </div>
+        <a href="#booking" class="btn-outline magnetic fade-up" data-magnetic>予約する →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- アクセスバーズとは -->
+<section class="about-bars">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="section-en">WHAT IS ACCESS BARS?</p>
+      <h2 class="section-title">アクセスバーズとは</h2>
+    </div>
+    <div class="bars-grid">
+      <div class="bars-intro fade-up">
+        <p class="bars-lead">「頭に触れるだけで、なぜ楽になるの？」<br>不思議に思うのは、当然です。</p>
+        <p>アクセスバーズは、1990年代にアメリカで生まれたボディワークです。頭部にある32カ所のポイントに、指先で優しく触れることで、脳に蓄積した感情・記憶・思い込みのパターンを解放していきます。</p>
+        <p>難しく言うと「脳の電磁場に働きかける」施術ですが、受けた方の多くは「とにかく眠くなった」「頭が軽くなった」「なぜか涙が出た」という言葉で感想を表します。理屈より、体が先に答えを知っているのかもしれません。</p>
+      </div>
+      <div class="bars-facts fade-up">
+        <div class="fact-card">
+          <div class="fact-icon">🌍</div>
+          <h4>世界170カ国以上で</h4>
+          <p>アクセスバーズは世界170カ国以上で実践されており、数百万人が体験しています。欧米では企業や学校・病院での導入事例もあります。</p>
+        </div>
+        <div class="fact-card">
+          <div class="fact-icon">🧠</div>
+          <h4>「脳のデフラグ」と呼ばれる理由</h4>
+          <p>施術後に脳波がシータ波（深い瞑想・入眠時に近い状態）に移行するという報告があります。デジタルデトックスに近い、脳の整理整頓です。</p>
+        </div>
+        <div class="fact-card">
+          <div class="fact-icon">💤</div>
+          <h4>施術中に眠ってしまう方が続出</h4>
+          <p>「施術中に意識がなくなった」「気づいたら終わっていた」というお声が多数。これは脳が深く休んでいるサインとも言われます。</p>
+        </div>
+        <div class="fact-card">
+          <div class="fact-icon">✋</div>
+          <h4>痛みゼロ・副作用なし</h4>
+          <p>針も薬も機械も使いません。頭部に指先で触れるだけ。衣服のまま受けられ、施術後すぐ日常生活に戻れます。</p>
+        </div>
+      </div>
+    </div>
+    <div class="bars-voice fade-up">
+      <p class="bv-lead">「信じていなかったけど…」という方の体験</p>
+      <div class="bv-quotes">
+        <blockquote>「正直、怪しいと思って最初は半信半疑でした。でも施術中に泣いていて、終わったら頭がスーッとして。あれは不思議としか言いようがない。」<cite>— 40代女性</cite></blockquote>
+        <blockquote>「理屈はよくわからないけど、翌日からの睡眠の質が明らかに変わりました。夫にも『顔が変わった』と言われて。」<cite>— 30代女性</cite></blockquote>
+      </div>
+    </div>
+    <p class="bars-note fade-up">※ アクセスバーズは医療行為ではありません。体の不調がある場合は医師へのご相談をお勧めします。</p>
+  </div>
+</section>
+
+<!-- スタッツ -->
+<section class="stats-section">
+  <div class="stats-inner">
+    <div class="stat-item fade-up">
+      <div class="stat-num"><span class="count" data-target="32">0</span></div>
+      <div class="stat-label">アクセスバーズ施術ポイント</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item fade-up">
+      <div class="stat-num"><span class="count" data-target="24">0</span><span class="stat-unit">h</span></div>
+      <div class="stat-label">オンライン予約受付</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item fade-up">
+      <div class="stat-num"><span class="count" data-target="100">0</span><span class="stat-unit">%</span></div>
+      <div class="stat-label">プライベートサロン</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item fade-up">
+      <div class="stat-num"><span class="count" data-target="1">0</span><span class="stat-unit">on1</span></div>
+      <div class="stat-label">完全マンツーマン</div>
+    </div>
+  </div>
+</section>
+
+<!-- こんな方へ -->
+<section class="for-who-section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="section-en">FOR YOU</p>
+      <h2 class="section-title">こんな方へ</h2>
+    </div>
+    <div class="for-who-flex">
+      <div class="for-who-card fade-up">
+        <div class="fwc-icon">🌊</div>
+        <h3>疲れが抜けない</h3>
+        <p>何日寝ても疲れが取れない、なんとなく重い——そんな慢性的なお疲れの方。</p>
+      </div>
+      <div class="for-who-card fade-up">
+        <div class="fwc-icon">🌙</div>
+        <h3>眠れない</h3>
+        <p>なかなか眠れない、途中で目が覚める、眠りが浅いと感じている方。</p>
+      </div>
+      <div class="for-who-card fade-up">
+        <div class="fwc-icon">🌿</div>
+        <h3>ストレス・不安</h3>
+        <p>頭がいつも忙しく休まらない、不安や感情の波に疲れている方。</p>
+      </div>
+      <div class="for-who-card fade-up">
+        <div class="fwc-icon">✨</div>
+        <h3>自分を変えたい</h3>
+        <p>何かが違うと感じている。本来の自分に戻りたい、軽くなりたいと思う方。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- メニュー -->
+<section class="menu-section" id="menu">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="section-en">MENU</p>
+      <h2 class="section-title">メニュー・料金</h2>
+    </div>
+  </div>
+  <div class="menu-track">
+
+    <div class="menu-card-new fade-up">
+      <div class="mcn-number">01</div>
+      <div class="mcn-badge">人気 No.1</div>
+      <div class="mcn-header">
+        <h3>アクセスバーズ</h3>
+        <span class="mcn-en">Access Bars</span>
+      </div>
+      <p class="mcn-desc">頭部32カ所のポイントに優しく触れる施術。「脳のデフラグ」とも呼ばれ、蓄積された感情・思い込み・過去のデータをリリース。施術中に眠ってしまう方が続出するほどの深いリラクゼーションを体感。</p>
+      <ul class="mcn-effects">
+        <li><span>→</span> 深いリラクゼーション・脳の休息</li>
+        <li><span>→</span> 感情・思考のクリアリング</li>
+        <li><span>→</span> 睡眠の質の向上</li>
+        <li><span>→</span> 創造性・直感力のアップ</li>
+      </ul>
+      <div class="mcn-footer">
+        <div class="mcn-meta">
+          <span class="mcn-time">90分</span>
+          <span class="mcn-price">¥ ○○,○○○<small>（税込）</small></span>
+        </div>
+        <a href="#booking" class="btn-card magnetic" data-magnetic>予約する</a>
+      </div>
+    </div>
+
+    <div class="menu-card-new fade-up">
+      <div class="mcn-number">02</div>
+      <div class="mcn-header">
+        <h3>自律神経ケア</h3>
+        <span class="mcn-en">Autonomic Care</span>
+      </div>
+      <p class="mcn-desc">交感神経と副交感神経のバランスを整えることで、身体の内側からリセット。血行を促し、筋肉・神経の緊張を緩め、心身に本来のしなやかさを取り戻します。</p>
+      <ul class="mcn-effects">
+        <li><span>→</span> 自律神経バランスの調整</li>
+        <li><span>→</span> ストレス・疲労の緩和</li>
+        <li><span>→</span> 血行促進・むくみ改善</li>
+        <li><span>→</span> ホルモンバランスへのアプローチ</li>
+      </ul>
+      <div class="mcn-footer">
+        <div class="mcn-meta">
+          <span class="mcn-time">60分</span>
+          <span class="mcn-price">¥ ○○,○○○<small>（税込）</small></span>
+        </div>
+        <a href="#booking" class="btn-card magnetic" data-magnetic>予約する</a>
+      </div>
+    </div>
+
+    <div class="menu-card-new fade-up mcn-featured">
+      <div class="mcn-number">03</div>
+      <div class="mcn-badge mcn-badge-gold">おすすめ</div>
+      <div class="mcn-header">
+        <h3>アクセスバーズ<br>＋自律神経ケア</h3>
+        <span class="mcn-en">Full Course</span>
+      </div>
+      <p class="mcn-desc">心・脳・身体のすべてにアプローチするスペシャルコース。アクセスバーズで頭の中を整理し、自律神経ケアで身体を根本から解放する。最も深い「ぬちぐすい」を体験したい方に。</p>
+      <ul class="mcn-effects">
+        <li><span>→</span> 全施術のメリットを凝縮</li>
+        <li><span>→</span> 心身の根本ケア</li>
+        <li><span>→</span> 初めての方にも最適</li>
+        <li><span>→</span> 完全マンツーマン120分</li>
+      </ul>
+      <div class="mcn-footer">
+        <div class="mcn-meta">
+          <span class="mcn-time">120分</span>
+          <span class="mcn-price">¥ ○○,○○○<small>（税込）</small></span>
+        </div>
+        <a href="#booking" class="btn-card btn-card-gold magnetic" data-magnetic>予約する</a>
+      </div>
+    </div>
+
+  </div>
+  <p class="menu-note fade-up">※ 料金・メニューは準備中です。決定次第更新いたします。</p>
+</section>
+
+<!-- アトモスフィア -->
+<section class="atmosphere">
+  <div class="atm-bg"></div>
+  <div class="atm-content">
+    <p class="atm-en fade-up">EXPERIENCE</p>
+    <blockquote class="atm-quote fade-up">
+      「ああ、生きてるって<br>こういうことか。」
+    </blockquote>
+    <p class="atm-sub fade-up">施術後に多くのお客様が口にする言葉です。</p>
+  </div>
+</section>
+
+<!-- ご利用の流れ -->
+<section class="flow-section" id="flow">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="section-en">HOW TO USE</p>
+      <h2 class="section-title">ご利用の流れ</h2>
+    </div>
+    <div class="flow-new">
+      <div class="flow-new-item fade-up">
+        <div class="fni-num">01</div>
+        <div class="fni-body">
+          <h3>ご予約</h3>
+          <p>このページの予約フォームから空き状況を確認し、ご希望の日時・メニューを選んでご予約ください。24時間いつでも受付可能です。</p>
+        </div>
+      </div>
+      <div class="flow-connector fade-up">
+        <div class="fc-line"></div>
+        <div class="fc-dot"></div>
+      </div>
+      <div class="flow-new-item fade-up">
+        <div class="fni-num">02</div>
+        <div class="fni-body">
+          <h3>ご来店</h3>
+          <p>お時間に余裕を持ってお越しください。初回はカウンセリングシート（約10分）にご記入いただきます。</p>
+        </div>
+      </div>
+      <div class="flow-connector fade-up">
+        <div class="fc-line"></div>
+        <div class="fc-dot"></div>
+      </div>
+      <div class="flow-new-item fade-up">
+        <div class="fni-num">03</div>
+        <div class="fni-body">
+          <h3>カウンセリング</h3>
+          <p>現在のお体の状態やお悩み・ご希望をヒアリング。初めての方もリラックスしてお話しください。</p>
+        </div>
+      </div>
+      <div class="flow-connector fade-up">
+        <div class="fc-line"></div>
+        <div class="fc-dot"></div>
+      </div>
+      <div class="flow-new-item fade-up">
+        <div class="fni-num">04</div>
+        <div class="fni-body">
+          <h3>施術</h3>
+          <p>静かな空間でゆっくりと施術を受けていただきます。衣服のままでOK。眠ってしまっても大丈夫。</p>
+        </div>
+      </div>
+      <div class="flow-connector fade-up">
+        <div class="fc-line"></div>
+        <div class="fc-dot"></div>
+      </div>
+      <div class="flow-new-item fade-up">
+        <div class="fni-num">05</div>
+        <div class="fni-body">
+          <h3>アフターケア</h3>
+          <p>施術後の状態確認とホームケアのアドバイス。お飲み物を飲みながらゆっくりお過ごしください。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- お客様の声 -->
+<section class="voice-section" id="voice">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="section-en">VOICE</p>
+      <h2 class="section-title">お客様の声</h2>
+    </div>
+    <div class="voice-new-grid">
+      <div class="voice-new-card fade-up">
+        <div class="vnc-stars">★★★★★</div>
+        <p class="vnc-text">「施術中に気づいたら眠っていました。終わった後の頭の軽さが驚くほどで、なんだかスッキリして帰りました。慢性的な肩こりもだいぶ楽になった気がします。」</p>
+        <div class="vnc-profile">
+          <span class="vnc-initial">Y</span>
+          <div>
+            <strong>30代女性</strong>
+            <span>那覇市 / アクセスバーズ</span>
+          </div>
+        </div>
+      </div>
+      <div class="voice-new-card fade-up">
+        <div class="vnc-stars">★★★★★</div>
+        <p class="vnc-text">「ずっと眠れない日が続いていたのですが、施術翌日からぐっすり眠れるようになりました。不思議ですが本当に効果を感じています。また来月も予約しました！」</p>
+        <div class="vnc-profile">
+          <span class="vnc-initial">M</span>
+          <div>
+            <strong>40代女性</strong>
+            <span>沖縄市 / 自律神経ケア</span>
+          </div>
+        </div>
+      </div>
+      <div class="voice-new-card fade-up">
+        <div class="vnc-stars">★★★★★</div>
+        <p class="vnc-text">「仕事のストレスで常にイライラしていた自分が、施術後は穏やかな気持ちになれました。空間も落ち着いていてとても居心地が良かったです。」</p>
+        <div class="vnc-profile">
+          <span class="vnc-initial">K</span>
+          <div>
+            <strong>50代女性</strong>
+            <span>うるま市 / フルコース</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- よくある質問 -->
+<section class="faq-section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="section-en">FAQ</p>
+      <h2 class="section-title">よくあるご質問</h2>
+    </div>
+    <div class="faq-new fade-up">
+      <div class="faq-item">
+        <button class="faq-q">アクセスバーズは初めてですが大丈夫ですか？</button>
+        <div class="faq-a"><p>もちろんです。初めての方にも丁寧にご説明しながら施術いたします。事前のカウンセリングで不安な点はなんでもご相談ください。</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">施術中はどのような服装でいいですか？</button>
+        <div class="faq-a"><p>普段着のままで受けていただけます。締め付けの少ない楽な服装でいらしていただくと、よりリラックスできます。</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">施術後の注意点はありますか？</button>
+        <div class="faq-a"><p>施術後は水分をしっかり摂るようにしてください。眠気を感じる場合もありますので、当日の運転には十分ご注意ください。</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">キャンセルポリシーを教えてください。</button>
+        <div class="faq-a"><p>前日までのキャンセルは無料です。当日キャンセルはキャンセル料が発生する場合があります。詳細は予約確認メールにてご確認ください。</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">駐車場はありますか？</button>
+        <div class="faq-a"><p>駐車場のご用意があります（無料）。詳しくはアクセスページをご確認いただくか、ご予約時にお問い合わせください。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- アクセス -->
+<section class="access-section" id="access">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="section-en">ACCESS</p>
+      <h2 class="section-title">アクセス</h2>
+    </div>
+    <div class="access-new-grid">
+      <div class="access-info fade-up">
+        <h3 class="access-name">NUCHIGUSUI <em>ぬちぐすい</em></h3>
+        <dl class="access-dl">
+          <div><dt>住所</dt><dd>沖縄県沖縄市美里仲原町</dd></div>
+          <div><dt>営業時間</dt><dd>準備中</dd></div>
+          <div><dt>定休日</dt><dd>準備中</dd></div>
+          <div><dt>電話</dt><dd>準備中</dd></div>
+          <div><dt>駐車場</dt><dd>あり（無料）</dd></div>
+        </dl>
+        <a href="#booking" class="btn-outline magnetic" data-magnetic>ご予約はこちら</a>
+      </div>
+      <div class="access-map-wrap fade-up">
+        <div class="map-mock">
+          <div class="map-pin">📍</div>
+          <p>沖縄市美里仲原町</p>
+          <small>地図は準備中です</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 予約 -->
+<section class="booking-section" id="booking">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="section-en">RESERVATION</p>
+      <h2 class="section-title">空き状況・ご予約</h2>
+      <p class="section-desc">ご希望の日時・メニューをお選びください</p>
+    </div>
+
+    <div class="booking-steps fade-up">
+      <div class="booking-step active" data-step="1"><div class="step-num">1</div><span>メニュー</span></div>
+      <div class="step-line"></div>
+      <div class="booking-step" data-step="2"><div class="step-num">2</div><span>日付</span></div>
+      <div class="step-line"></div>
+      <div class="booking-step" data-step="3"><div class="step-num">3</div><span>時間</span></div>
+      <div class="step-line"></div>
+      <div class="booking-step" data-step="4"><div class="step-num">4</div><span>お客様情報</span></div>
+      <div class="step-line"></div>
+      <div class="booking-step" data-step="5"><div class="step-num">5</div><span>確認・完了</span></div>
+    </div>
+
+    <div class="booking-container fade-up">
+
+      <!-- STEP 1 -->
+      <div class="booking-panel active" id="step1">
+        <h3 class="panel-title">メニューをお選びください</h3>
+        <div class="menu-select-grid">
+          <label class="menu-select-card">
+            <input type="radio" name="menu" value="access_bars" data-time="90分" data-price="¥○○,○○○">
+            <div class="menu-select-inner"><span class="msi-icon">✦</span><div><strong>アクセスバーズ</strong><span>90分</span></div><span class="msi-price">¥○○,○○○</span></div>
+          </label>
+          <label class="menu-select-card">
+            <input type="radio" name="menu" value="autonomic" data-time="60分" data-price="¥○○,○○○">
+            <div class="menu-select-inner"><span class="msi-icon">◈</span><div><strong>自律神経ケア</strong><span>60分</span></div><span class="msi-price">¥○○,○○○</span></div>
+          </label>
+          <label class="menu-select-card">
+            <input type="radio" name="menu" value="combination" data-time="120分" data-price="¥○○,○○○">
+            <div class="menu-select-inner"><span class="msi-icon">✿</span><div><strong>アクセスバーズ＋自律神経ケア</strong><span>120分</span></div><span class="msi-price">¥○○,○○○</span></div>
+          </label>
+        </div>
+        <div class="step-nav"><button class="btn-step" id="step1Next" disabled>次へ →</button></div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="booking-panel" id="step2">
+        <h3 class="panel-title">ご希望の日付をお選びください</h3>
+        <div class="calendar-wrap">
+          <div class="calendar-header">
+            <button class="cal-nav" id="prevMonth">‹</button>
+            <span id="calTitle"></span>
+            <button class="cal-nav" id="nextMonth">›</button>
+          </div>
+          <div class="calendar-legend">
+            <span><span class="legend-dot available"></span>空きあり</span>
+            <span><span class="legend-dot few"></span>残りわずか</span>
+            <span><span class="legend-dot full"></span>満</span>
+          </div>
+          <div class="calendar-grid"><div class="cal-day-header">日</div><div class="cal-day-header">月</div><div class="cal-day-header">火</div><div class="cal-day-header">水</div><div class="cal-day-header">木</div><div class="cal-day-header">金</div><div class="cal-day-header">土</div></div>
+          <div class="calendar-body" id="calendarBody"></div>
+        </div>
+        <div class="step-nav">
+          <button class="btn-step btn-back" id="step2Back">← 戻る</button>
+          <button class="btn-step" id="step2Next" disabled>次へ →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="booking-panel" id="step3">
+        <h3 class="panel-title">ご希望の時間をお選びください</h3>
+        <p class="step-date-display" id="selectedDateDisplay"></p>
+        <div class="time-slots" id="timeSlots"></div>
+        <div class="step-nav">
+          <button class="btn-step btn-back" id="step3Back">← 戻る</button>
+          <button class="btn-step" id="step3Next" disabled>次へ →</button>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="booking-panel" id="step4">
+        <h3 class="panel-title">お客様情報をご入力ください</h3>
+        <form class="booking-form" id="bookingForm">
+          <div class="form-row">
+            <div class="form-group"><label>お名前 <span class="required">必須</span></label><input type="text" id="customerName" placeholder="例：山田 花子" required></div>
+            <div class="form-group"><label>フリガナ <span class="required">必須</span></label><input type="text" id="customerNameKana" placeholder="例：ヤマダ ハナコ" required></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>電話番号 <span class="required">必須</span></label><input type="tel" id="customerPhone" placeholder="例：090-0000-0000" required></div>
+            <div class="form-group"><label>メールアドレス <span class="required">必須</span></label><input type="email" id="customerEmail" placeholder="例：example@mail.com" required></div>
+          </div>
+          <div class="form-group">
+            <label>初回・リピート <span class="required">必須</span></label>
+            <div class="radio-group">
+              <label class="radio-label"><input type="radio" name="visit" value="first" checked> 初めて</label>
+              <label class="radio-label"><input type="radio" name="visit" value="repeat"> リピーター</label>
+            </div>
+          </div>
+          <div class="form-group"><label>ご要望・気になること（任意）</label><textarea id="customerNote" rows="4" placeholder="お体の状態、気になっていること、アレルギーなど"></textarea></div>
+        </form>
+        <div class="step-nav">
+          <button class="btn-step btn-back" id="step4Back">← 戻る</button>
+          <button class="btn-step" id="step4Next">内容を確認する →</button>
+        </div>
+      </div>
+
+      <!-- STEP 5 -->
+      <div class="booking-panel" id="step5">
+        <div id="confirmView">
+          <h3 class="panel-title">予約内容のご確認</h3>
+          <div class="confirm-table">
+            <div class="confirm-row"><span>メニュー</span><strong id="confirmMenu"></strong></div>
+            <div class="confirm-row"><span>日時</span><strong id="confirmDatetime"></strong></div>
+            <div class="confirm-row"><span>お名前</span><strong id="confirmName"></strong></div>
+            <div class="confirm-row"><span>電話番号</span><strong id="confirmPhone"></strong></div>
+            <div class="confirm-row"><span>メール</span><strong id="confirmEmail"></strong></div>
+            <div class="confirm-row"><span>ご来店</span><strong id="confirmVisit"></strong></div>
+            <div class="confirm-row" id="confirmNoteRow"><span>ご要望</span><strong id="confirmNote"></strong></div>
+          </div>
+          <p class="confirm-caution">※ 予約確認メールをお送りします。内容をご確認のうえ「予約を確定する」を押してください。</p>
+          <div class="step-nav">
+            <button class="btn-step btn-back" id="step5Back">← 戻る</button>
+            <button class="btn-step btn-confirm" id="confirmBtn">予約を確定する ✓</button>
+          </div>
+        </div>
+        <div id="completeView" class="complete-view hidden">
+          <div class="complete-icon">🌺</div>
+          <h3>ご予約を承りました</h3>
+          <p>ご予約ありがとうございます。<br>確認メールをお送りしましたのでご確認ください。</p>
+          <div class="complete-summary" id="completeSummary"></div>
+          <p class="complete-note">当日お会いできることを楽しみにしております。</p>
+          <a href="#top" class="btn-step" onclick="resetBooking()">トップページへ戻る</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- フッター -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-logo-wrap">
+      <span class="footer-logo-en">NUCHIGUSUI</span>
+      <span class="footer-logo-ja">ぬちぐすい</span>
+    </div>
+    <p class="footer-catch">からだが緩む。こころが喜ぶ。</p>
+  </div>
+  <div class="footer-mid">
+    <div class="footer-info">
+      <p>アクセスバーズ・自律神経ケアサロン</p>
+      <p>沖縄県沖縄市美里仲原町</p>
+    </div>
+    <nav class="footer-nav">
+      <a href="#philosophy">コンセプト</a>
+      <a href="#menu">メニュー</a>
+      <a href="#flow">ご利用の流れ</a>
+      <a href="#voice">お客様の声</a>
+      <a href="#access">アクセス</a>
+      <a href="#booking">予約する</a>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 NUCHIGUSUI All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

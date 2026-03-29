@@ -460,13 +460,26 @@ document.getElementById('confirmBtn').addEventListener('click', async () => {
     note: document.getElementById('customerNote').value.trim()
   };
 
-  // TODO: Google Apps Script エンドポイントに送信（設定後に有効化）
-  // const GAS_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL';
-  // try {
-  //   const res = await fetch(GAS_URL, { method: 'POST', body: JSON.stringify(bookingData) });
-  //   const result = await res.json();
-  //   if (!result.success) { btn.textContent = '予約を確定する ✓'; btn.disabled = false; alert(result.message); return; }
-  // } catch (e) { btn.textContent = '予約を確定する ✓'; btn.disabled = false; alert('送信エラーが発生しました。再度お試しください。'); return; }
+  // APIに予約データを送信
+  try {
+    const response = await fetch('/api/book', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(bookingData),
+    });
+    const result = await response.json();
+    if (!response.ok) {
+      btn.textContent = '予約を確定する ✓';
+      btn.disabled = false;
+      alert(result.error || '送信エラーが発生しました。再度お試しください。');
+      return;
+    }
+  } catch (e) {
+    btn.textContent = '予約を確定する ✓';
+    btn.disabled = false;
+    alert('通信エラーが発生しました。再度お試しください。');
+    return;
+  }
 
   // 完了表示
   await new Promise(r => setTimeout(r, 1000));

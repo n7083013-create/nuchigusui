@@ -182,7 +182,7 @@ document.querySelectorAll('.faq-q').forEach(btn => {
 
 // Google Calendar API設定
 const GCAL_CALENDAR_ID = 'c_47081a0e67f736c29579251b8bc3e126afb40a011714c54193fcb55355633d68@group.calendar.google.com';
-const GCAL_API_KEY = 'YOUR_GOOGLE_CALENDAR_API_KEY'; // ← APIキーをここに入れる
+const GCAL_API_KEY = 'AIzaSyC106Hd6PKGdVw_ZTp2DbfJJZO_PX4PupU';
 
 // 終日イベント（休み）の日付を取得してキャッシュ
 const blockedDatesCache = {};

@@ -180,6 +180,46 @@ document.querySelectorAll('.faq-q').forEach(btn => {
 //   予約システム
 // ========================================
 
+// Google Calendar API設定
+const GCAL_CALENDAR_ID = 'c_47081a0e67f736c29579251b8bc3e126afb40a011714c54193fcb55355633d68@group.calendar.google.com';
+const GCAL_API_KEY = 'YOUR_GOOGLE_CALENDAR_API_KEY'; // ← APIキーをここに入れる
+
+// 終日イベント（休み）の日付を取得してキャッシュ
+const blockedDatesCache = {};
+
+async function fetchBlockedDates(year, month) {
+  const cacheKey = `${year}-${month}`;
+  if (blockedDatesCache[cacheKey]) return blockedDatesCache[cacheKey];
+  if (GCAL_API_KEY === 'YOUR_GOOGLE_CALENDAR_API_KEY') return new Set();
+
+  const timeMin = new Date(year, month, 1).toISOString();
+  const timeMax = new Date(year, month + 1, 0, 23, 59, 59).toISOString();
+  const calId = encodeURIComponent(GCAL_CALENDAR_ID);
+  const url = `https://www.googleapis.com/calendar/v3/calendars/${calId}/events?key=${GCAL_API_KEY}&timeMin=${timeMin}&timeMax=${timeMax}&singleEvents=true&maxResults=50`;
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    const blocked = new Set();
+    (data.items || []).forEach(ev => {
+      // 終日イベントは start.date があり start.dateTime がない
+      if (ev.start && ev.start.date && !ev.start.dateTime) {
+        // 複数日にまたがる終日イベントにも対応
+        const start = new Date(ev.start.date);
+        const end = new Date(ev.end.date); // Googleカレンダーのend.dateは翌日なので <end で処理
+        for (let d = new Date(start); d < end; d.setDate(d.getDate() + 1)) {
+          blocked.add(d.toISOString().slice(0, 10));
+        }
+      }
+    });
+    blockedDatesCache[cacheKey] = blocked;
+    return blocked;
+  } catch (e) {
+    console.warn('カレンダー取得失敗:', e);
+    return new Set();
+  }
+}
+
 let selectedMenu = null, selectedDate = null, selectedTime = null;
 const today = new Date();
 today.setHours(0, 0, 0, 0);
@@ -208,8 +248,9 @@ function generateTimeSlots(dateStr) {
 }
 
 // --- カレンダー ---
-function renderCalendar(year, month) {
+async function renderCalendar(year, month) {
   const avail = generateAvailability(year, month);
+  const blocked = await fetchBlockedDates(year, month);
   const monthNames = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
   document.getElementById('calTitle').textContent = `${year}年 ${monthNames[month]}`;
   const body = document.getElementById('calendarBody');
@@ -224,14 +265,16 @@ function renderCalendar(year, month) {
     const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
     const dow = date.getDay();
     const isPast = date <= today;
+    const isBlocked = blocked.has(dateStr); // 終日イベント（休み）チェック
     const status = avail[d];
     const cell = document.createElement('div');
     cell.className = 'cal-day';
     if (dow === 0) cell.classList.add('sunday');
     if (dow === 6) cell.classList.add('saturday');
-    if (isPast || status === 'closed') {
+    if (isPast || status === 'closed' || isBlocked) {
       cell.classList.add('past');
-      cell.innerHTML = `<span class="day-num">${d}</span>${status === 'closed' ? '<small style="font-size:.55rem;color:#ccc">休</small>' : ''}`;
+      const label = isBlocked ? '<small style="font-size:.55rem;color:#ccc">休</small>' : (status === 'closed' ? '<small style="font-size:.55rem;color:#ccc">休</small>' : '');
+      cell.innerHTML = `<span class="day-num">${d}</span>${label}`;
     } else if (status === 'full') {
       cell.classList.add('full');
       cell.innerHTML = `<span class="day-num">${d}</span><div class="dot"></div>`;

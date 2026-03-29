@@ -226,25 +226,69 @@ today.setHours(0, 0, 0, 0);
 let currentYear = today.getFullYear();
 let currentMonth = today.getMonth();
 
+// --- 予約受付ルール ---
+// 当日予約不可 / 前日21時以降は翌日も不可
+const now = new Date();
+const tomorrow = new Date(today);
+tomorrow.setDate(tomorrow.getDate() + 1);
+const tomorrowStr = tomorrow.toISOString().slice(0, 10);
+const isTomorrowBlocked = now.getHours() >= 21; // 21時以降は翌日受付停止
+
+// 営業時間：10:00〜最終受付16:00
+const ALL_TIMES = ['10:00', '11:30', '13:00', '14:30', '16:00'];
+
 // --- 空き状況 ---
 function generateAvailability(year, month) {
   const data = {};
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   for (let d = 1; d <= daysInMonth; d++) {
     const date = new Date(year, month, d);
-    if (date <= today) continue;
+    const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    if (date <= today) continue; // 当日・過去は不可
+    if (isTomorrowBlocked && dateStr === tomorrowStr) { data[d] = 'closed'; continue; } // 21時以降は翌日不可
     if (date.getDay() === 0) { data[d] = 'closed'; continue; }
-    const r = Math.random();
-    data[d] = r < 0.15 ? 'full' : r < 0.35 ? 'few' : 'available';
+    // APIキー設定前はランダム表示（仮）、設定後はカレンダー実データで上書き
+    data[d] = 'available';
   }
   return data;
 }
 
-const ALL_TIMES = ['10:00', '11:30', '13:00', '14:30', '16:00', '17:30'];
+// --- カレンダーから時間帯の予約済みスロットを取得（ダブルブッキング防止）---
+const bookedSlotsCache = {};
 
-function generateTimeSlots(dateStr) {
-  const seed = dateStr.split('-').reduce((a, b) => a + parseInt(b), 0);
-  return ALL_TIMES.map(t => ({ time: t, booked: seed % 7 !== 0 && Math.random() < 0.3 }));
+async function fetchBookedTimeSlots(dateStr) {
+  if (bookedSlotsCache[dateStr]) return bookedSlotsCache[dateStr];
+  if (GCAL_API_KEY === 'YOUR_GOOGLE_CALENDAR_API_KEY') return new Set();
+
+  const timeMin = `${dateStr}T00:00:00+09:00`;
+  const timeMax = `${dateStr}T23:59:59+09:00`;
+  const calId = encodeURIComponent(GCAL_CALENDAR_ID);
+  const url = `https://www.googleapis.com/calendar/v3/calendars/${calId}/events?key=${GCAL_API_KEY}&timeMin=${timeMin}&timeMax=${timeMax}&singleEvents=true&maxResults=20`;
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    const booked = new Set();
+    (data.items || []).forEach(ev => {
+      if (ev.start && ev.start.dateTime) {
+        // 時間帯イベント → 重なるスロットをブロック
+        const evStart = new Date(ev.start.dateTime);
+        const evEnd = new Date(ev.end.dateTime);
+        ALL_TIMES.forEach(slot => {
+          const [sh, sm] = slot.split(':').map(Number);
+          const slotTime = new Date(evStart);
+          slotTime.setHours(sh, sm, 0, 0);
+          // スロット開始がイベント期間内に含まれる場合はブロック
+          if (slotTime >= evStart && slotTime < evEnd) booked.add(slot);
+        });
+      }
+    });
+    bookedSlotsCache[dateStr] = booked;
+    return booked;
+  } catch (e) {
+    console.warn('時間スロット取得失敗:', e);
+    return new Set();
+  }
 }
 
 // --- カレンダー ---
@@ -304,18 +348,22 @@ document.getElementById('nextMonth').addEventListener('click', () => {
   selectedDate = null; document.getElementById('step2Next').disabled = true;
 });
 
-// --- 時間スロット ---
-function renderTimeSlots(dateStr) {
-  const slots = generateTimeSlots(dateStr);
+// --- 時間スロット（カレンダー実データでブロック）---
+async function renderTimeSlots(dateStr) {
   const container = document.getElementById('timeSlots');
-  container.innerHTML = '';
+  container.innerHTML = '<p style="text-align:center;color:#999;font-size:.85rem;padding:16px">読み込み中...</p>';
   selectedTime = null;
   document.getElementById('step3Next').disabled = true;
-  slots.forEach(({ time, booked }) => {
+
+  const bookedSlots = await fetchBookedTimeSlots(dateStr);
+
+  container.innerHTML = '';
+  ALL_TIMES.forEach(time => {
+    const isBooked = bookedSlots.has(time);
     const btn = document.createElement('button');
-    btn.className = 'time-slot' + (booked ? ' booked' : '');
-    btn.innerHTML = `${time}<small>${booked ? '満' : '○'}</small>`;
-    if (!booked) {
+    btn.className = 'time-slot' + (isBooked ? ' booked' : '');
+    btn.innerHTML = `${time}<small>${isBooked ? '満' : '○'}</small>`;
+    if (!isBooked) {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.time-slot').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
@@ -394,23 +442,50 @@ document.getElementById('step4Back').addEventListener('click', () => goToStep(3)
 
 // STEP5
 document.getElementById('step5Back').addEventListener('click', () => goToStep(4));
-document.getElementById('confirmBtn').addEventListener('click', () => {
+document.getElementById('confirmBtn').addEventListener('click', async () => {
   const btn = document.getElementById('confirmBtn');
   btn.textContent = '送信中...'; btn.disabled = true;
-  setTimeout(() => {
-    document.getElementById('confirmView').classList.add('hidden');
-    document.getElementById('completeView').classList.remove('hidden');
-    const name = document.getElementById('customerName').value.trim();
-    const [y, m, d] = selectedDate.split('-');
-    const dow = ['日','月','火','水','木','金','土'][new Date(selectedDate).getDay()];
-    document.getElementById('completeSummary').innerHTML = `
-      <div><strong>メニュー：</strong>${selectedMenu.name}</div>
-      <div><strong>日時：</strong>${y}年${parseInt(m)}月${parseInt(d)}日（${dow}） ${selectedTime}〜</div>
-      <div><strong>お名前：</strong>${name} 様</div>
-    `;
-    document.querySelectorAll('.booking-step').forEach(s => s.classList.add('done'));
-    document.querySelector('[data-step="5"]').classList.add('active');
-  }, 1200);
+
+  // 送信するデータを収集（送信後に消去）
+  const bookingData = {
+    menu: selectedMenu.name,
+    date: selectedDate,
+    time: selectedTime,
+    duration: selectedMenu.time,
+    name: document.getElementById('customerName').value.trim(),
+    nameKana: document.getElementById('customerNameKana').value.trim(),
+    phone: document.getElementById('customerPhone').value.trim(),
+    email: document.getElementById('customerEmail').value.trim(),
+    visit: document.querySelector('input[name="visit"]:checked').value,
+    note: document.getElementById('customerNote').value.trim()
+  };
+
+  // TODO: Google Apps Script エンドポイントに送信（設定後に有効化）
+  // const GAS_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+  // try {
+  //   const res = await fetch(GAS_URL, { method: 'POST', body: JSON.stringify(bookingData) });
+  //   const result = await res.json();
+  //   if (!result.success) { btn.textContent = '予約を確定する ✓'; btn.disabled = false; alert(result.message); return; }
+  // } catch (e) { btn.textContent = '予約を確定する ✓'; btn.disabled = false; alert('送信エラーが発生しました。再度お試しください。'); return; }
+
+  // 完了表示
+  await new Promise(r => setTimeout(r, 1000));
+  document.getElementById('confirmView').classList.add('hidden');
+  document.getElementById('completeView').classList.remove('hidden');
+  const [y, m, d] = selectedDate.split('-');
+  const dow = ['日','月','火','水','木','金','土'][new Date(selectedDate).getDay()];
+  document.getElementById('completeSummary').innerHTML = `
+    <div><strong>メニュー：</strong>${bookingData.menu}</div>
+    <div><strong>日時：</strong>${y}年${parseInt(m)}月${parseInt(d)}日（${dow}） ${selectedTime}〜</div>
+    <div><strong>お名前：</strong>${bookingData.name} 様</div>
+  `;
+  document.querySelectorAll('.booking-step').forEach(s => s.classList.add('done'));
+  document.querySelector('[data-step="5"]').classList.add('active');
+
+  // セキュリティ：送信完了後にフォームの個人情報をメモリから消去
+  ['customerName','customerNameKana','customerPhone','customerEmail','customerNote'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
 });
 
 function resetBooking() {

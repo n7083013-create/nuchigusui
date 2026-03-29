@@ -1187,6 +1187,51 @@ section { padding: 120px 0; }
    ======================================== */
 .booking-section { background: var(--white); }
 
+/* Googleカレンダー埋め込み */
+.gcal-wrap {
+  max-width: 860px;
+  margin: 0 auto 48px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--dark);
+}
+.gcal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 20px;
+  background: var(--dark);
+  border-bottom: 1px solid rgba(201,169,110,.2);
+  flex-wrap: wrap;
+}
+.gcal-label {
+  color: var(--gold);
+  font-size: .85rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+}
+.gcal-note {
+  color: rgba(255,255,255,.5);
+  font-size: .75rem;
+}
+.gcal-frame-wrap {
+  position: relative;
+  width: 100%;
+}
+.gcal-frame-wrap iframe {
+  display: block;
+  width: 100%;
+  min-height: 420px;
+  filter: invert(1) hue-rotate(180deg) brightness(.85) contrast(.9);
+  border-radius: 0 0 16px 16px;
+}
+@media (max-width: 600px) {
+  .gcal-header { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .gcal-frame-wrap iframe { min-height: 340px; }
+}
+
 .booking-steps {
   display: flex;
   align-items: center;
